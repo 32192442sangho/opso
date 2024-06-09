@@ -17,7 +17,6 @@ total_href_list = []
 
 # 각 페이지에 접속하고 데이터 크롤링
 for page_number in range(start_page, end_page):
-    print(f"@@@@@{page_number}@@@@@")
     # 페이지 URL 생성
     url = f"https://games-stats.com/steam/?title=&page={page_number}"
 
@@ -36,7 +35,7 @@ for page_number in range(start_page, end_page):
                 EC.presence_of_element_located((By.XPATH, "/html/body/section/div[1]/div/div[3]/table/tbody/tr[1]/td[2]/a[1]"))
             )
         except:
-            print(f"페이지 {page_number}에서 요소를 찾을 수 없습니다.")
+            print(f"can't find element at page {page_number}")
             continue
 
     # 모든 <a> 태그에서 href 속성 추출하여 리스트에 저장
@@ -49,16 +48,13 @@ for page_number in range(start_page, end_page):
                 xpath = f"/html/body/section/div[1]/div/div[3]/table/tbody/tr[{i}]/td[2]/a[1]"
                 element = driver.find_element(By.XPATH, xpath)
             except:
-                print(f"페이지 {page_number}의 {i}번째 요소를 찾을 수 없습니다.")
+                print(f"The {i}th element of page {page_number} could not be found.")
                 continue
         href = element.get_attribute("href")
         if href:
             total_href_list.append(href)
         time.sleep(1)
-        print(len(total_href_list))
     time.sleep(3)
-print(f"추출된 href 리스트 ({len(total_href_list)}개): {total_href_list}")
-
 
 game_info = []
 code = ''
@@ -146,5 +142,5 @@ for i in game_info:
 ],
 """
     code = code + temp
-print("@"*50)
+
 print(code)
