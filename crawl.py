@@ -133,7 +133,7 @@ for game in total_href_list:
 
 for i in game_info:
     temp = f"""[
-    'title' => '{i[0]}',
+    'title' => "{i[0]}",
     'category' => '{i[1]}',
     'release_date' => '{i[2]}',
     'sales_numbers' => '{i[3]}',
